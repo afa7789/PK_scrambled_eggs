@@ -201,49 +201,54 @@ func (nc *NaturalConstant) calculatePhi(amount int) {
 func (nc *NaturalConstant) calculateLn2(amount int) {
 	// Set the precision to the desired number of digits plus a few extra for accuracy
 	precision := uint(amount + 2)
-	nc.digits = make([]int, amount)
-
-	// Create a new big.Float with the specified precision
 	ln2 := new(big.Float).SetPrec(precision).SetFloat64(math.Ln2)
 
 	// Convert the big.Float to a string and extract the digits
 	ln2Str := ln2.Text('f', amount)
-	for i, char := range ln2Str[2:] { // Skip "0."
+	nc.decimalPos = strings.Index(ln2Str, ".")   // Track the decimal point position
+	ln2Str = strings.ReplaceAll(ln2Str, ".", "") // Remove the decimal point for digit extraction
+
+	nc.digits = make([]int, len(ln2Str))
+	for i, char := range ln2Str {
 		nc.digits[i] = int(char - '0')
 	}
-	nc.number_of_digits = amount
+	nc.number_of_digits = len(nc.digits)
 }
 
 // calculateGamma calculates Euler's constant (gamma) to the specified precision.
 func (nc *NaturalConstant) calculateGamma(amount int) {
 	// Set the precision to the desired number of digits plus a few extra for accuracy
 	precision := uint(amount + 2)
-	nc.digits = make([]int, amount)
-
-	// Create a new big.Float with the specified precision
 	gamma := new(big.Float).SetPrec(precision).SetFloat64(0.57721566490153286060) // Approximation of Euler's constant
 
 	// Convert the big.Float to a string and extract the digits
 	gammaStr := gamma.Text('f', amount)
-	for i, char := range gammaStr[2:] { // Skip "0."
+	nc.decimalPos = strings.Index(gammaStr, ".")     // Track the decimal point position
+	gammaStr = strings.ReplaceAll(gammaStr, ".", "") // Remove the decimal point for digit extraction
+
+	nc.digits = make([]int, len(gammaStr))
+	for i, char := range gammaStr {
 		nc.digits[i] = int(char - '0')
 	}
+	nc.number_of_digits = len(nc.digits)
 }
 
 // calculateSqrt2 calculates the square root of 2 to the specified precision.
 func (nc *NaturalConstant) calculateSqrt2(amount int) {
 	// Set the precision to the desired number of digits plus a few extra for accuracy
 	precision := uint(amount + 2)
-	nc.digits = make([]int, amount)
-
-	// Create a new big.Float with the specified precision
 	sqrt2 := new(big.Float).SetPrec(precision).SetFloat64(math.Sqrt2)
 
 	// Convert the big.Float to a string and extract the digits
 	sqrt2Str := sqrt2.Text('f', amount)
-	for i, char := range sqrt2Str[2:] { // Skip "1."
+	nc.decimalPos = strings.Index(sqrt2Str, ".")     // Track the decimal point position
+	sqrt2Str = strings.ReplaceAll(sqrt2Str, ".", "") // Remove the decimal point for digit extraction
+
+	nc.digits = make([]int, len(sqrt2Str))
+	for i, char := range sqrt2Str {
 		nc.digits[i] = int(char - '0')
 	}
+	nc.number_of_digits = len(nc.digits)
 }
 
 // populateDigits converts a *big.Float to digits and tracks the decimal point.

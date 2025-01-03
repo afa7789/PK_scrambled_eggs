@@ -8,12 +8,14 @@ import (
 )
 
 func TestNewCustomConstant(t *testing.T) {
+	// t.Run("", func(t *testing.T) {
 	date := time.Date(2023, 10, 5, 0, 0, 0, 0, time.UTC)
 	cc := NewCustomConstant(0, date) // Using PI as the base natural constant
 
 	if cc.floatDate.String() != "0.10052023" {
 		t.Errorf("Expected floatDate to be 0.05102023, got %s", cc.floatDate.String())
 	}
+	// })
 }
 
 func TestCalculateCustomConstant(t *testing.T) {
@@ -40,46 +42,32 @@ func TestCalculateCustomConstant(t *testing.T) {
 }
 
 func TestNaturalConstantCalculateDigits(t *testing.T) {
-	nc := NewNaturalConstant(0) // Using PI as the base natural constant
-	nc.CalculateDigits(100)     // Calculate 10 digits of PI
 
-	expected := "3.1415926535"
-	result := nc.String()[:12] // Get the first 12 characters (including "3.")
-
-	if result != expected {
-		t.Errorf("Expected PI to start with %s, got %s", expected, result)
+	tests := []struct {
+		name     string
+		base     int
+		expected string
+	}{
+		{"PI", 0, "3.1415926535"},                     // PI
+		{"Euler's number", 1, "2.7182818284"},         // Euler's number (e)
+		{"Golden Ratio", 2, "1.6180339887"},           // Golden ratio (phi)
+		{"Natural logarithm of 2", 3, "0.6931471805"}, // Natural logarithm of 2 (ln(2))
+		{"Euler's constant", 4, "0.5772156649"},       // Euler's constant (gamma)
+		{"Square root of 2", 5, "1.4142135623"},       // Square root of 2 (sqrt(2))
 	}
 
-	// check other natural constants
-	// from woflram alpha: 2.71828182845904523536028747135266249775724709369995957496696762772407663035...
-	nc = NewNaturalConstant(1)
-	nc.CalculateDigits(100)
-	fmt.Println(nc.String())
-	// 2.7182818284590452353602874713536013977993050833954989575140352708881863463830086402595043182373046875
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			// t.func() // TestNaturalConstantCalculateDigits
+			nc := NewNaturalConstant(test.base)
+			nc.CalculateDigits(100)
+			result := nc.String()[:12] // Get the first 12 characters
 
-	// from wolfram 1.61803398874989484820458683436563811772030917980576286213544862270526046281...
-	nc = NewNaturalConstant(2)
-	nc.CalculateDigits(100)
-	fmt.Println(nc.String())
-	// 1.6180339887498948482045868343657895377906517771085788355350451594993899107066681608557701110839843750
-
-	// from wolfram 0.693147180559945309417232121458176568075500134360255254120680009493393622
-	nc = NewNaturalConstant(3)
-	nc.CalculateDigits(100)
-	fmt.Println(nc.String())
-	// 6.931471805599452862267639829951804131269454956054687500000000000000000000000000000000000000000000000
-
-	// from wolfram 0.57721566490153286060651209008240243104215933593992359880576723488486772677...
-	nc = NewNaturalConstant(4)
-	nc.CalculateDigits(100)
-	fmt.Println(nc.String())
-	// 5.772156649015328655494272425130475312471389770507812500000000000000000000000000000000000000000000000
-
-	// wolfram alpha: 1.41421356237309504880168872420969807856967187537694807317667973799073248
-	nc = NewNaturalConstant(5)
-	nc.CalculateDigits(100)
-	fmt.Println(nc.String())
-	// 4.142135623730951454746218587388284504413604736328125000000000000000000000000000000000000000000000000
+			if result != test.expected {
+				t.Errorf("Expected constant to start with %s, got %s", test.expected, result)
+			}
+		})
+	}
 
 }
 
