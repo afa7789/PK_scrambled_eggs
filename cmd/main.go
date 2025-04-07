@@ -5,6 +5,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/afa7789/PK_scrambled_eggs/internal/scramble"
 	"github.com/spf13/cobra"
 )
 
@@ -45,6 +46,10 @@ func main() {
 			fmt.Printf("Integer: %d\n", intFlag)
 			fmt.Printf("String: %s\n", stringFlag)
 			fmt.Printf("Date: %s\n", dateFlag)
+			if err := scramble.Scramble(intFlag, stringFlag, dateFlag); err != nil {
+				fmt.Println("Error:", err)
+				os.Exit(1)
+			}
 		},
 	}
 

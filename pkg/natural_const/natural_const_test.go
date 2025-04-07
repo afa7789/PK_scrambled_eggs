@@ -60,9 +60,10 @@ func TestNaturalConstantCalculateDigits(t *testing.T) {
 		t.Run(test.name, func(t *testing.T) {
 			// t.func() // TestNaturalConstantCalculateDigits
 			nc := NewNaturalConstant(test.base)
-			nc.CalculateDigits(100)
+			nc.CalculateDigits(1000)
 			result := nc.String()[:12] // Get the first 12 characters
-
+			// print results
+			fmt.Printf("result %s", result)
 			if result != test.expected {
 				t.Errorf("Expected constant to start with %s, got %s", test.expected, result)
 			}

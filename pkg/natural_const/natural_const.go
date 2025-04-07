@@ -10,7 +10,7 @@ import (
 
 // Constant
 type Constant struct {
-	digits           []int
+	Digits           []int
 	number_of_digits int
 	decimalPos       int // Track the decimal point position
 }
@@ -32,7 +32,7 @@ type CustomConstant struct {
 // String returns the digits of the custom constant as a string.
 func (c *Constant) String() string {
 	var sb strings.Builder
-	for i, digit := range c.digits {
+	for i, digit := range c.Digits {
 		if i == c.decimalPos { // Add decimal point
 			sb.WriteString(".")
 		}
@@ -42,13 +42,13 @@ func (c *Constant) String() string {
 }
 
 func NewConstant(digits []int) *Constant {
-	return &Constant{digits: digits, number_of_digits: len(digits)}
+	return &Constant{Digits: digits, number_of_digits: len(digits)}
 }
 
 func NewNaturalConstant(baseInt int) *NaturalConstant {
 	return &NaturalConstant{
 		base:     baseInt,
-		Constant: Constant{digits: []int{}, number_of_digits: 0, decimalPos: 1},
+		Constant: Constant{Digits: []int{}, number_of_digits: 0, decimalPos: 1},
 	}
 }
 
@@ -69,6 +69,7 @@ func NewCustomConstant(baseInt int, date time.Time) *CustomConstant {
 }
 
 // CalculateCustomConstant calculates the custom constant by dividing the natural constant by the date.
+// amount is the number of digits to calculate.
 func (cc *CustomConstant) CalculateCustomConstant(amount int) {
 	cc.BaseNaturalConstant.CalculateDigits(amount)
 
@@ -208,11 +209,11 @@ func (nc *NaturalConstant) calculateLn2(amount int) {
 	nc.decimalPos = strings.Index(ln2Str, ".")   // Track the decimal point position
 	ln2Str = strings.ReplaceAll(ln2Str, ".", "") // Remove the decimal point for digit extraction
 
-	nc.digits = make([]int, len(ln2Str))
+	nc.Digits = make([]int, len(ln2Str))
 	for i, char := range ln2Str {
-		nc.digits[i] = int(char - '0')
+		nc.Digits[i] = int(char - '0')
 	}
-	nc.number_of_digits = len(nc.digits)
+	nc.number_of_digits = len(nc.Digits)
 }
 
 // calculateGamma calculates Euler's constant (gamma) to the specified precision.
@@ -226,11 +227,11 @@ func (nc *NaturalConstant) calculateGamma(amount int) {
 	nc.decimalPos = strings.Index(gammaStr, ".")     // Track the decimal point position
 	gammaStr = strings.ReplaceAll(gammaStr, ".", "") // Remove the decimal point for digit extraction
 
-	nc.digits = make([]int, len(gammaStr))
+	nc.Digits = make([]int, len(gammaStr))
 	for i, char := range gammaStr {
-		nc.digits[i] = int(char - '0')
+		nc.Digits[i] = int(char - '0')
 	}
-	nc.number_of_digits = len(nc.digits)
+	nc.number_of_digits = len(nc.Digits)
 }
 
 // calculateSqrt2 calculates the square root of 2 to the specified precision.
@@ -244,11 +245,11 @@ func (nc *NaturalConstant) calculateSqrt2(amount int) {
 	nc.decimalPos = strings.Index(sqrt2Str, ".")     // Track the decimal point position
 	sqrt2Str = strings.ReplaceAll(sqrt2Str, ".", "") // Remove the decimal point for digit extraction
 
-	nc.digits = make([]int, len(sqrt2Str))
+	nc.Digits = make([]int, len(sqrt2Str))
 	for i, char := range sqrt2Str {
-		nc.digits[i] = int(char - '0')
+		nc.Digits[i] = int(char - '0')
 	}
-	nc.number_of_digits = len(nc.digits)
+	nc.number_of_digits = len(nc.Digits)
 }
 
 // populateDigits converts a *big.Float to digits and tracks the decimal point.
@@ -257,9 +258,9 @@ func (c *Constant) populateDigits(value *big.Float, amount int) {
 	c.decimalPos = strings.Index(str, ".") // Track the decimal point position
 	str = strings.ReplaceAll(str, ".", "") // Remove the decimal point for digit extraction
 
-	c.digits = make([]int, len(str))
+	c.Digits = make([]int, len(str))
 	for i, ch := range str {
-		c.digits[i] = int(ch - '0')
+		c.Digits[i] = int(ch - '0')
 	}
-	c.number_of_digits = len(c.digits)
+	c.number_of_digits = len(c.Digits)
 }
