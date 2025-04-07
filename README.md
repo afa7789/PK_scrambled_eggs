@@ -1,4 +1,3 @@
-⚠️ incomplete for now.
 # PK Scramble Eggs
 ## CLI Tool for Date-Based Character Shifting
 
