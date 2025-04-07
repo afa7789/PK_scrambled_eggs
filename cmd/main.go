@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/afa7789/PK_scrambled_eggs/internal/scramble"
+	nconst "github.com/afa7789/PK_scrambled_eggs/pkg/natural_const"
 	"github.com/spf13/cobra"
 )
 
@@ -43,7 +44,7 @@ func main() {
 				os.Exit(1)
 			}
 
-			fmt.Printf("Integer: %d\n", intFlag)
+			fmt.Printf("Integer: %d => %s\n", intFlag, nconst.Name(intFlag))
 			fmt.Printf("String: %s\n", stringFlag)
 			fmt.Printf("Date: %s\n", dateFlag)
 			if err := scramble.Scramble(intFlag, stringFlag, dateFlag); err != nil {

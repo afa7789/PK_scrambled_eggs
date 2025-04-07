@@ -106,6 +106,11 @@ func (nc NaturalConstant) Name() string {
 	}
 }
 
+func Name(base int) string {
+	nc := NaturalConstant{base: base}
+	return nc.Name()
+}
+
 // CalculateDigits calculates the digits of the natural constant up to the specified amount dynamically.
 func (nc *NaturalConstant) CalculateDigits(amount int) {
 	switch nc.base {
