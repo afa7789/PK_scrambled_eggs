@@ -13,3 +13,7 @@ lint:
 test:
 	@echo "Go tests of this project"
 	@go test ./...
+
+build:
+	@echo "\033[2m→ Building the project...\033[0m"
+	@go build -o pk_scrambled_eggs cmd/main.go

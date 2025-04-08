@@ -7,6 +7,8 @@ A cool way to scramble strings :)
 
 This CLI tool takes a date, transforms it into a float in the format `0.MONTH-DAY-YEAR`, and uses a natural constant (such as π) to perform character shifting on a given string. This can be used to encode secrets in plain text.
 
+This is just a cipher without a ciphering table it's ciphering by digits of a natural or "custom" constant.
+
 ## Features
 
 - Accepts a date input.
@@ -23,12 +25,15 @@ This CLI tool takes a date, transforms it into a float in the format `0.MONTH-DA
 #  -d, --date string    A date flag (MM-DD-YYYY) (default "01-03-2009")
 #  -s, --string string  A string flag (default "default")
 #  -i, --constant int   An integer flag (0-5)
-go run cmd/main.go --date 2023-10-05 --constant 1 --string "HelloWorld"
+go run cmd/main.go --date 10-05-2023 --constant 1 --string "HelloWorld"
+# or use the binary
+# make build to create it
+./pk_scrambled_eggs --date 10-05-2023 --constant 1 --string "HelloWorld"
 ```
 
 ## Example
 
-Given the date `2023-10-05`:
+Given the date `10-05-2023`:
 1. Convert to float: `0.10-05-2023`
 2. Divide π by the float value.
 3. Extract digits up to the specified length.
@@ -145,4 +150,4 @@ Unscrambled string "klgfurv" to "default"
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under whatever License.
