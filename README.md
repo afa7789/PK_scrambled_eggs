@@ -35,55 +35,108 @@ If you send date as `00-00-0000`, it won't do the float division//multiplication
 ## Example output:
 
 ``` bash
-➜  PK_scrambled_eggs git:(main) ✗ make run
-→ Running the command line executable...
-Integer: 0
+# creating
+➜ go run cmd/main.go  --date 01-01-0000 
+Integer: 0 => PI - π 
 String: default
-Date: 01-03-2009
-Custom constant: 304.415237813391751341467225577
+Date: 01-01-0000
+CustomConstant: 3.141592653613770380616188049 / 0.010100000000000000000000000 = 311.048777386693671198174504950
+Custom constant[31]: 311.048777386693671198174504950
 
 Scramble -> d -> : g , 100 + 3 = 103 
-Scramble -> e -> : e , 101 + 0 = 101 
-Scramble -> f -> : j , 102 + 4 = 106 
-Scramble -> a -> : e , 097 + 4 = 101 
-Scramble -> u -> : v , 117 + 1 = 118 
-Scramble -> l -> : q , 108 + 5 = 113 
-Scramble -> t -> : v , 116 + 2 = 118 
-Scrambled string "default" to "gejevqv"
+Scramble -> e -> : f , 101 + 1 = 102 
+Scramble -> f -> : g , 102 + 1 = 103 
+Scramble -> a -> : a , 097 + 0 = 97 
+Scramble -> u -> : y , 117 + 4 = 121 
+Scramble -> l -> : t , 108 + 8 = 116 
+Scramble -> t -> : { , 116 + 7 = 123 
+Scrambled string "default" to "gfgayt{"
 
 Unscramble -> d -> : a , 100 - 3 = 97 
-Unscramble -> e -> : e , 101 - 0 = 101 
-Unscramble -> f -> : b , 102 - 4 = 98 
-Unscramble -> a -> : ] , 097 - 4 = 93 
-Unscramble -> u -> : t , 117 - 1 = 116 
-Unscramble -> l -> : g , 108 - 5 = 103 
-Unscramble -> t -> : r , 116 - 2 = 114 
-Unscrambled string "default" to "aeb]tgr"
+Unscramble -> e -> : d , 101 - 1 = 100 
+Unscramble -> f -> : e , 102 - 1 = 101 
+Unscramble -> a -> : a , 097 - 0 = 97 
+Unscramble -> u -> : q , 117 - 4 = 113 
+Unscramble -> l -> : d , 108 - 8 = 100 
+Unscramble -> t -> : m , 116 - 7 = 109 
+Unscrambled string "default" to "adeaqdm"
 
-➜  PK_scrambled_eggs git:(main) ✗ go run cmd/main.go --string gejevqv
-Integer: 0
-String: gejevqv
-Date: 01-03-2009
-Custom constant: 304.415237813391751341467225577
+# reverting
+➜ go run cmd/main.go  --date 01-01-0000 --string gfgayt{
+Integer: 0 => PI - π 
+String: gfgayt{
+Date: 01-01-0000
+CustomConstant: 3.141592653613770380616188049 / 0.010100000000000000000000000 = 311.048777386693671198174504950
+Custom constant[31]: 311.048777386693671198174504950
 
 Scramble -> g -> : j , 103 + 3 = 106 
-Scramble -> e -> : e , 101 + 0 = 101 
-Scramble -> j -> : n , 106 + 4 = 110 
-Scramble -> e -> : i , 101 + 4 = 105 
-Scramble -> v -> : w , 118 + 1 = 119 
-Scramble -> q -> : v , 113 + 5 = 118 
-Scramble -> v -> : x , 118 + 2 = 120 
-Scrambled string "gejevqv" to "jeniwvx"
+Scramble -> f -> : g , 102 + 1 = 103 
+Scramble -> g -> : h , 103 + 1 = 104 
+Scramble -> a -> : a , 097 + 0 = 97 
+Scramble -> y -> : } , 121 + 4 = 125 
+Scramble -> t -> : | , 116 + 8 = 124 
+Scramble -> { -> :  , 123 + 7 = 130 
+Scrambled string "gfgayt{" to "jgha}|"
 
 Unscramble -> g -> : d , 103 - 3 = 100 
-Unscramble -> e -> : e , 101 - 0 = 101 
-Unscramble -> j -> : f , 106 - 4 = 102 
-Unscramble -> e -> : a , 101 - 4 = 97 
-Unscramble -> v -> : u , 118 - 1 = 117 
-Unscramble -> q -> : l , 113 - 5 = 108 
-Unscramble -> v -> : t , 118 - 2 = 116 
-Unscrambled string "gejevqv" to "default"
+Unscramble -> f -> : e , 102 - 1 = 101 
+Unscramble -> g -> : f , 103 - 1 = 102 
+Unscramble -> a -> : a , 097 - 0 = 97 
+Unscramble -> y -> : u , 121 - 4 = 117 
+Unscramble -> t -> : l , 116 - 8 = 108 
+Unscramble -> { -> : t , 123 - 7 = 116 
+Unscrambled string "gfgayt{" to "default"
 
+# with a custom date
+➜ go run cmd/main.go  --date 04-07-2025           
+Integer: 0 => PI - π 
+String: default
+Date: 04-07-2025
+CustomConstant: 3.141592653613770380616188049 / 0.040720250000000000000000000 = 77.150622886784979932627194086
+Custom constant[30]: 77.150622886784979932627194086
+
+Scramble -> d -> : k , 100 + 7 = 107 
+Scramble -> e -> : l , 101 + 7 = 108 
+Scramble -> f -> : g , 102 + 1 = 103 
+Scramble -> a -> : f , 097 + 5 = 102 
+Scramble -> u -> : u , 117 + 0 = 117 
+Scramble -> l -> : r , 108 + 6 = 114 
+Scramble -> t -> : v , 116 + 2 = 118 
+Scrambled string "default" to "klgfurv"
+
+Unscramble -> d -> : ] , 100 - 7 = 93 
+Unscramble -> e -> : ^ , 101 - 7 = 94 
+Unscramble -> f -> : e , 102 - 1 = 101 
+Unscramble -> a -> : \ , 097 - 5 = 92 
+Unscramble -> u -> : u , 117 - 0 = 117 
+Unscramble -> l -> : f , 108 - 6 = 102 
+Unscramble -> t -> : r , 116 - 2 = 114 
+Unscrambled string "default" to "]^e\ufr"
+
+➜  go run cmd/main.go  --date 04-07-2025 --string klgfurv
+Integer: 0 => PI - π 
+String: klgfurv
+Date: 04-07-2025
+CustomConstant: 3.141592653613770380616188049 / 0.040720250000000000000000000 = 77.150622886784979932627194086
+Custom constant[30]: 77.150622886784979932627194086
+
+Scramble -> k -> : r , 107 + 7 = 114 
+Scramble -> l -> : s , 108 + 7 = 115 
+Scramble -> g -> : h , 103 + 1 = 104 
+Scramble -> f -> : k , 102 + 5 = 107 
+Scramble -> u -> : u , 117 + 0 = 117 
+Scramble -> r -> : x , 114 + 6 = 120 
+Scramble -> v -> : x , 118 + 2 = 120 
+Scrambled string "klgfurv" to "rshkuxx"
+
+Unscramble -> k -> : d , 107 - 7 = 100 
+Unscramble -> l -> : e , 108 - 7 = 101 
+Unscramble -> g -> : f , 103 - 1 = 102 
+Unscramble -> f -> : a , 102 - 5 = 97 
+Unscramble -> u -> : u , 117 - 0 = 117 
+Unscramble -> r -> : l , 114 - 6 = 108 
+Unscramble -> v -> : t , 118 - 2 = 116 
+Unscrambled string "klgfurv" to "default"
 ```
 
 ## License
