@@ -30,6 +30,8 @@ Given the date `2023-10-05`:
 3. Extract digits up to the specified length.
 4. Shift characters in the string "HelloWorld" using the extracted digits.
 
+If you send date as `00-00-0000`, it won't do the float division//multiplication it will be just the natural constant.
+
 ## Example output:
 
 ``` bash

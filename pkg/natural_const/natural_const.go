@@ -68,6 +68,15 @@ func NewCustomConstant(baseInt int, date time.Time) *CustomConstant {
 	}
 }
 
+func NewCustomConstantDateZero(baseInt int) *CustomConstant {
+	nc := NewNaturalConstant(baseInt)
+	return &CustomConstant{
+		BaseNaturalConstant: nc,
+		date:                time.Time{},
+		floatDate:           *big.NewFloat(1),
+	}
+}
+
 // CalculateCustomConstant calculates the custom constant by dividing the natural constant by the date.
 // amount is the number of digits to calculate.
 func (cc *CustomConstant) CalculateCustomConstant(amount int) {
@@ -76,6 +85,8 @@ func (cc *CustomConstant) CalculateCustomConstant(amount int) {
 	ncValue := cc.BaseNaturalConstant.toBigFloat(amount)
 	// dateValue := big.NewFloat(cc.floatDate).SetPrec(uint(amount + 2))
 	customValue := new(big.Float).Quo(ncValue, &cc.floatDate)
+	// debug it here
+	fmt.Printf("CustomConstant: %s / %s = %s\n", cc.BaseNaturalConstant.String(), cc.floatDate.Text('f', amount), customValue.Text('f', amount))
 	cc.populateDigits(customValue, amount)
 }
 

@@ -15,15 +15,29 @@ func Scramble(
 	stringFlag string,
 	dateFlag string,
 ) error {
-	// Here you can add the logic to process the flags
-	// For example, you can create a new custom constant based on the integer flag
-	// and the date flag
-	date, err := time.Parse("01-02-2006", dateFlag)
-	if err != nil {
-		fmt.Println("Error parsing date:", err)
-		os.Exit(1)
+
+	var date time.Time
+
+	if dateFlag == "00-00-0000" {
+		date = time.Time{}
+	} else {
+		var err error
+		// Here you can add the logic to process the flags
+		// For example, you can create a new custom constant based on the integer flag
+		// and the date flag
+		date, err = time.Parse("01-02-2006", dateFlag)
+		if err != nil {
+			fmt.Println("Error parsing date:", err)
+			os.Exit(1)
+		}
 	}
-	cc := nconst.NewCustomConstant(intFlag, date)    // using a natural constant as the base ( on int flag )
+	var cc *nconst.CustomConstant
+	if date.IsZero() {
+		cc = nconst.NewCustomConstantDateZero(intFlag) // using a natural constant as the base ( on int flag )
+	} else {
+		// using a natural constant as the base ( on int flag )
+		cc = nconst.NewCustomConstant(intFlag, date)
+	}
 	cc.CalculateCustomConstant(len(stringFlag) + 20) // entry is the number of digits to calculate
 	str := cc.String()
 	fmt.Printf("Custom constant[%d]: %s\n\n", len(str), str)
