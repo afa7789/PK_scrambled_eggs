@@ -1,4 +1,8 @@
 # PK Scramble Eggs
+![images](resources/image.png)
+
+A cool way to scramble strings :)
+
 ## CLI Tool for Date-Based Character Shifting
 
 This CLI tool takes a date, transforms it into a float in the format `0.MONTH-DAY-YEAR`, and uses a natural constant (such as π) to perform character shifting on a given string. This can be used to encode secrets in plain text.
