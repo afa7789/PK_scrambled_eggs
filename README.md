@@ -1,28 +1,55 @@
-# PK Scramble Eggs
+# PK Scrambled Eggs
 ![images](resources/image.png)
 
-A cool way to scramble strings :)
+A fun and clever way to scramble strings using math and dates.
+❌ Not bulletproof encryption — just cool, creative ciphering.
 
-## Cryptographically speaking
+> Hide messages in plain sight with math, dates, and ✨ a little magic.
 
-It's an OTP-inspired Vigenère system using pseudorandom constant-derived keys.
+## Cryptographically Speaking
 
-Obfuscated key derivation from mathematical constants. Pseudorandom key stream from irrational constant, seeded with temporal value.
+PK Scrambled Eggs is:
 
-"A custom cipher system combining one-time-pad principles, deterministic pseudorandom key generation (from mathematical constants), and date-based obfuscation."
+- 🧠 An OTP-inspired Vigenère system using pseudorandom constant-derived keys.
+- 🔐 A custom cipher system that combines:
+  - One-time-pad principles
+  - Deterministic pseudorandom key generation (e.g. from π or e)
+  - Date-based obfuscation
+- 🎨 Great for creative crypto, art, puzzles, and hiding messages in plain sight.
 
-🔐 Obfuscated cipher scheme
-🔢 Key-morphing encoding system
-🔍 Temporal+Mathematical Keyed Cipher
-🎨 Steganographic micro-crypto
+It’s not cryptographically secure — it’s **obfuscation with style**.
 
-## CLI Tool for Date-Based Character Shifting
+- 🔐 Obfuscated cipher scheme
+- 🔢 Key-morphing encoding system
+- 🔍 Temporal+Mathematical Keyed Cipher
+- 🎨 Steganographic micro-crypto
+
+## Usages
+
+- Hiding a message in jewelry or a notebook	✅ More than enough	
+- Obfuscating IDs or non-sensitive values	✅ Great and clever	
+- Storing passwords, crypto wallets, private info	❌ Better use actual encryption	
+- Building a puzzle/code for fun or art	✅ Amazing idea 💡	
+- Trying to impress a cryptographer	❌ Not crypto-safe, but cool! 😄
+
+## What is it for ? 
+
+A CLI Tool for Date-Based Character Obfuscation
 
 This CLI tool takes a date, transforms it into a float in the format `0.MONTH-DAY-YEAR`, and uses a natural constant (such as π) to perform character shifting on a given string. This can be used to encode secrets in plain text.
 
-This is just a cipher without a ciphering table it's ciphering by digits of a natural or "custom" constant. 
+This is just a cipher without a ciphering table it's ciphering by digits of a natural or "custom" constant.
 
-## Features
+### How It Works (Simplified)
+
+1. Take your string (e.g. `"default"`)
+2. Use a date like `01-01-0000` → convert to `0.010100000000...`
+3. Divide π (or your chosen constant) by that date float
+4. Use the resulting digits to **shift characters** in the string
+
+Result: a scrambled string that's reversible *only if you know the date and constant*.
+
+### Features
 
 - Accepts a date input.
 - Converts the date to a float in the format `0.MONTH-DAY-YEAR`.
@@ -30,6 +57,15 @@ This is just a cipher without a ciphering table it's ciphering by digits of a na
 - Stores all digits up to a specified length.
 - Uses the digits to shift characters in a string.
 - this will be used to hide things in plain sight. ( only the person who knows it will be able to decode.)
+
+### Available Constants
+
+- 0 - Number PI π
+- 1 - Euler's number (e)
+- 2 - Golden ratio (phi), ϕ
+- 3 - Natural logarithm of 2, ln(2)
+- 4 - Euler's constant γ
+- 5 - Pythagoras' constant √2
 
 ## Usage
 
@@ -163,4 +199,4 @@ Unscrambled string "klgfurv" to "default"
 
 ## License
 
-This project is licensed under whatever License.
+Do whatever you want with it , it's Unlicensed.
