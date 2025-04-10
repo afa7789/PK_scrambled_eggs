@@ -2,6 +2,7 @@
 ![images](resources/image.png)
 
 A fun and clever way to scramble strings using math and dates.
+
 ❌ Not bulletproof encryption — just cool, creative ciphering.
 
 > Hide messages in plain sight with math, dates, and ✨ a little magic.
