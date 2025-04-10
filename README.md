@@ -92,6 +92,7 @@ If you send date as `00-00-0000`, it won't do the float division//multiplication
 
 ## Example output:
 
+Non Date usage obsfucation (scramble):
 ``` bash
 # creating
 ➜ go run cmd/main.go  --date 01-01-0000 
@@ -144,7 +145,10 @@ Unscramble -> y -> : u , 121 - 4 = 117
 Unscramble -> t -> : l , 116 - 8 = 108 
 Unscramble -> { -> : t , 123 - 7 = 116 
 Unscrambled string "gfgayt{" to "default"
+```
 
+Using a date for better obsfucation:
+```bash
 # with a custom date
 ➜ go run cmd/main.go  --date 04-07-2025           
 Integer: 0 => PI - π 
