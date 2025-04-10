@@ -3,11 +3,24 @@
 
 A cool way to scramble strings :)
 
+## Cryptographically speaking
+
+It's an OTP-inspired Vigenère system using pseudorandom constant-derived keys.
+
+Obfuscated key derivation from mathematical constants. Pseudorandom key stream from irrational constant, seeded with temporal value.
+
+"A custom cipher system combining one-time-pad principles, deterministic pseudorandom key generation (from mathematical constants), and date-based obfuscation."
+
+🔐 Obfuscated cipher scheme
+🔢 Key-morphing encoding system
+🔍 Temporal+Mathematical Keyed Cipher
+🎨 Steganographic micro-crypto
+
 ## CLI Tool for Date-Based Character Shifting
 
 This CLI tool takes a date, transforms it into a float in the format `0.MONTH-DAY-YEAR`, and uses a natural constant (such as π) to perform character shifting on a given string. This can be used to encode secrets in plain text.
 
-This is just a cipher without a ciphering table it's ciphering by digits of a natural or "custom" constant.
+This is just a cipher without a ciphering table it's ciphering by digits of a natural or "custom" constant. 
 
 ## Features
 
