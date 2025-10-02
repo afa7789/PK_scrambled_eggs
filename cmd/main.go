@@ -15,6 +15,7 @@ func main() {
 	var stringFlag string
 	var dateFlag string
 	var fileFlag string
+	var debug bool
 
 	var rootCmd = &cobra.Command{
 		Use:   "app",
@@ -24,6 +25,7 @@ func main() {
 	-s, --string string  A string flag (default "default")
 	-f, --file string    A filepath to read string input from
 	-d, --date string    A date flag (MM-DD-YYYY) (default "01-03-2009")
+	-v, --verbose Enable verbose output
 	-h, --help           Show help message`,
 		Run: func(cmd *cobra.Command, args []string) {
 
@@ -56,10 +58,14 @@ func main() {
 				}
 				stringFlag = string(data)
 			}
-			fmt.Printf("Integer: %d => %s \n", intFlag, nconst.Name(intFlag))
-			fmt.Printf("String: %s\n", stringFlag)
-			fmt.Printf("Date: %s\n", dateFlag)
-			if err := scramble.Scramble(intFlag, stringFlag, dateFlag); err != nil {
+
+			if debug {
+				fmt.Printf("Integer: %d => %s \n", intFlag, nconst.Name(intFlag))
+				fmt.Printf("String: %s\n", stringFlag)
+				fmt.Printf("Date: %s\n", dateFlag)
+			}
+
+			if err := scramble.Scramble(intFlag, stringFlag, dateFlag, debug); err != nil {
 				fmt.Println("Error:", err)
 				os.Exit(1)
 			}
@@ -69,6 +75,7 @@ func main() {
 	rootCmd.Flags().IntVarP(&intFlag, "constant", "i", 0, "An integer flag (0-5)")
 	rootCmd.Flags().StringVarP(&stringFlag, "string", "s", "default", "A string flag")
 	rootCmd.Flags().StringVarP(&fileFlag, "file", "f", "", "A filepath to read string input from")
+	rootCmd.Flags().BoolVarP(&debug, "debug", "v", false, "Enable verbose output")
 	// 3 January 2009
 	rootCmd.Flags().StringVarP(&dateFlag, "date", "d", "01-03-2009", "A date flag (MM-DD-YYYY)")
 

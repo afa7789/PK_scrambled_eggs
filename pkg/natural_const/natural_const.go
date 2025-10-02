@@ -86,7 +86,10 @@ func (cc *CustomConstant) CalculateCustomConstant(amount int) {
 	// dateValue := big.NewFloat(cc.floatDate).SetPrec(uint(amount + 2))
 	customValue := new(big.Float).Quo(ncValue, &cc.floatDate)
 	// debug it here
-	fmt.Printf("CustomConstant: %s / %s = %s\n", cc.BaseNaturalConstant.String(), cc.floatDate.Text('f', amount), customValue.Text('f', amount))
+	fmt.Printf("CustomConstant Math: %s / %s = \nCustomConstant:%s\n",
+		strings.TrimRight(strings.TrimRight(cc.BaseNaturalConstant.String(), "0"), "."),
+		strings.TrimRight(strings.TrimRight(cc.floatDate.Text('f', amount), "0"), "."),
+		strings.TrimRight(strings.TrimRight(customValue.Text('f', amount), "0"), "."))
 	cc.populateDigits(customValue, amount)
 }
 
