@@ -52,6 +52,7 @@ func main() {
 
 			// If fileFlag is set, read string from file
 			if fileFlag != "" {
+				// #nosec G304 -- file path is provided by user via CLI flag
 				data, err := os.ReadFile(fileFlag)
 				if err != nil {
 					fmt.Printf("Failed to read file '%s': %v\n", fileFlag, err)

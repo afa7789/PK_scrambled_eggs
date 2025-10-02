@@ -7,6 +7,8 @@ linters:
     - gocritic
     - errorlint
     - gomodguard
+    - gosec       # Security checker
+    - staticcheck # Advanced static analysis
 
 linters-settings:
   gomodguard:
@@ -16,12 +18,17 @@ linters-settings:
             recommendations:
               - errors
             reason: "Use standard library errors package"
-        - io/ioutil:
+        - github.com/ghodss/yaml:
             recommendations:
-              - io
-              - os
-            reason: "Deprecated since Go 1.16"
+              - gopkg.in/yaml.v3
+            reason: "Deprecated, use yaml.v3"
       local_replace_directives: false
+
+  gosec:
+    excludes:
+      - G104 # Audit errors not checked (too noisy)
+    config:
+      G101: "(?i)(?:passwd|password|secret|token)" # Token detection
 
 issues:
   exclude:

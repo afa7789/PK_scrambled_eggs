@@ -96,6 +96,10 @@ func (cc *CustomConstant) CalculateCustomConstant(amount int) {
 // toBigFloat converts the digits of the natural constant to a big.Float.
 func (nc *NaturalConstant) toBigFloat(amount int) *big.Float {
 	str := nc.String()
+	if amount < 0 {
+		amount = 0
+	}
+	// #nosec G115 -- amount is validated to be non-negative
 	value, _, _ := big.ParseFloat(str, 10, uint(amount+2), big.ToNearestEven)
 	return value
 }
@@ -145,6 +149,10 @@ func (nc *NaturalConstant) CalculateDigits(amount int) {
 
 func (nc *NaturalConstant) calculatePi(amount int) {
 	// Add extra digits to account for rounding
+	if amount < 0 {
+		amount = 0
+	}
+	// #nosec G115 -- amount is validated to be non-negative
 	precision := uint(amount + 10)
 	pi := big.NewFloat(0).SetPrec(precision)
 	four := big.NewFloat(4).SetPrec(precision)
@@ -184,6 +192,10 @@ func (nc *NaturalConstant) calculatePi(amount int) {
 
 // calculateE calculates Euler's number e using a series expansion.
 func (nc *NaturalConstant) calculateENumber(amount int) {
+	if amount < 0 {
+		amount = 0
+	}
+	// #nosec G115 -- amount is validated to be non-negative
 	precision := uint(amount + 2)           // Add extra digits for rounding
 	e := big.NewFloat(2).SetPrec(precision) // e starts at 2 (1 + 1/1!)
 	factorial := big.NewFloat(1).SetPrec(precision)
@@ -200,6 +212,10 @@ func (nc *NaturalConstant) calculateENumber(amount int) {
 
 // calculatePhi calculates the golden ratio (ϕ) to the specified number of digits.
 func (nc *NaturalConstant) calculatePhi(amount int) {
+	if amount < 0 {
+		amount = 0
+	}
+	// #nosec G115 -- amount is validated to be non-negative
 	precision := uint(amount + 2) // Add extra digits to account for rounding
 	one := big.NewFloat(1).SetPrec(precision)
 	two := big.NewFloat(2).SetPrec(precision)
@@ -219,7 +235,11 @@ func (nc *NaturalConstant) calculatePhi(amount int) {
 
 // calculateLn2 calculates the natural logarithm of 2 to the specified precision.
 func (nc *NaturalConstant) calculateLn2(amount int) {
+	if amount < 0 {
+		amount = 0
+	}
 	// Set the precision to the desired number of digits plus a few extra for accuracy
+	// #nosec G115 -- amount is validated to be non-negative
 	precision := uint(amount + 2)
 	ln2 := new(big.Float).SetPrec(precision).SetFloat64(math.Ln2)
 
@@ -237,7 +257,11 @@ func (nc *NaturalConstant) calculateLn2(amount int) {
 
 // calculateGamma calculates Euler's constant (gamma) to the specified precision.
 func (nc *NaturalConstant) calculateGamma(amount int) {
+	if amount < 0 {
+		amount = 0
+	}
 	// Set the precision to the desired number of digits plus a few extra for accuracy
+	// #nosec G115 -- amount is validated to be non-negative
 	precision := uint(amount + 2)
 	gamma := new(big.Float).SetPrec(precision).SetFloat64(0.57721566490153286060) // Approximation of Euler's constant
 
@@ -255,7 +279,11 @@ func (nc *NaturalConstant) calculateGamma(amount int) {
 
 // calculateSqrt2 calculates the square root of 2 to the specified precision.
 func (nc *NaturalConstant) calculateSqrt2(amount int) {
+	if amount < 0 {
+		amount = 0
+	}
 	// Set the precision to the desired number of digits plus a few extra for accuracy
+	// #nosec G115 -- amount is validated to be non-negative
 	precision := uint(amount + 2)
 	sqrt2 := new(big.Float).SetPrec(precision).SetFloat64(math.Sqrt2)
 

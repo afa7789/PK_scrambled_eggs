@@ -65,7 +65,7 @@ func Scramble(
 
 	// Write output to output.txt and print to screen
 	fmt.Print(output)
-	err = os.WriteFile("output.txt", []byte(fileOutput), 0644)
+	err = os.WriteFile("output.txt", []byte(fileOutput), 0600)
 	if err != nil {
 		fmt.Printf("Error writing to output.txt: %v\n", err)
 		return err

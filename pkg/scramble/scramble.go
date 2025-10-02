@@ -33,6 +33,10 @@ func Scramble(intFlag *int, input *string, dateFlag *string) (string, error) {
 	cc.CalculateCustomConstant(len(inputRunes) + 100)
 	scrambledArray := make([]rune, len(inputRunes))
 	for i, char := range inputRunes {
+		if cc.Digits[i] < 0 || cc.Digits[i] > 9 {
+			cc.Digits[i] = 0 // Sanitize digit value
+		}
+		// #nosec G115 -- digit is validated to be 0-9
 		scrambledArray[i] = char + int32(cc.Digits[i])
 	}
 	return string(scrambledArray), nil
@@ -65,6 +69,10 @@ func Unscramble(intFlag *int, scrambled *string, dateFlag *string) (string, erro
 	cc.CalculateCustomConstant(len(scrambledRunes) + 100)
 	unscrambledArray := make([]rune, len(scrambledRunes))
 	for i, char := range scrambledRunes {
+		if cc.Digits[i] < 0 || cc.Digits[i] > 9 {
+			cc.Digits[i] = 0 // Sanitize digit value
+		}
+		// #nosec G115 -- digit is validated to be 0-9
 		unscrambledArray[i] = char - int32(cc.Digits[i])
 	}
 	return string(unscrambledArray), nil
