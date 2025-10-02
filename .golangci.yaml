@@ -6,27 +6,22 @@ linters:
   enable:
     - gocritic
     - errorlint
-  disable:
-    - depguard  # Disabled: depguard still blocking imports even with list-mode: lax
+    - gomodguard
 
 linters-settings:
-  depguard:
-    rules:
-      main:
-        list-mode: lax  # Allows everything unless denied
-        files:
-          - $all
-          - "!$test"
-        allow:
-          - $gostd
-          - github.com/afa7789/PK_scrambled_eggs
-          - github.com/mattn/go-sqlite3
-          - github.com/spf13/cobra
-          - github.com/spf13/pflag
-          - github.com/inconshreveable/mousetrap
-        deny:
-          - pkg: io/ioutil
-            desc: "Replaced by io and os packages since Go 1.16"
+  gomodguard:
+    blocked:
+      modules:
+        - github.com/pkg/errors:
+            recommendations:
+              - errors
+            reason: "Use standard library errors package"
+        - io/ioutil:
+            recommendations:
+              - io
+              - os
+            reason: "Deprecated since Go 1.16"
+      local_replace_directives: false
 
 issues:
   exclude:
