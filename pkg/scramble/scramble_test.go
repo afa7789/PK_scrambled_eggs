@@ -22,4 +22,10 @@ func TestMultilineScrambleUnscramble(t *testing.T) {
 	if input != unscrambled {
 		t.Errorf("Unscrambled string does not match original.\nOriginal: %q\nUnscrambled: %q", input, unscrambled)
 	}
+
+	if input == unscrambled {
+		t.Logf("✓ Verification successful\nunscrambled:\n%s\n\ninput:\n%s", unscrambled, input)
+	} else {
+		t.Errorf("✗ Verification failed")
+	}
 }

@@ -30,7 +30,7 @@ func Scramble(intFlag *int, input *string, dateFlag *string) (string, error) {
 		cc = nconst.NewCustomConstant(*intFlag, date)
 	}
 	inputRunes := []rune(inputVal)
-	cc.CalculateCustomConstant(len(inputRunes) + 20)
+	cc.CalculateCustomConstant(len(inputRunes) + 100)
 	scrambledArray := make([]rune, len(inputRunes))
 	for i, char := range inputRunes {
 		scrambledArray[i] = char + int32(cc.Digits[i])
@@ -62,7 +62,7 @@ func Unscramble(intFlag *int, scrambled *string, dateFlag *string) (string, erro
 		cc = nconst.NewCustomConstant(*intFlag, date)
 	}
 	scrambledRunes := []rune(scrambledVal)
-	cc.CalculateCustomConstant(len(scrambledRunes) + 20)
+	cc.CalculateCustomConstant(len(scrambledRunes) + 100)
 	unscrambledArray := make([]rune, len(scrambledRunes))
 	for i, char := range scrambledRunes {
 		unscrambledArray[i] = char - int32(cc.Digits[i])

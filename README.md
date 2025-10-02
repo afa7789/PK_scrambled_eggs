@@ -3,35 +3,35 @@
 
 A fun and clever way to scramble strings using math and dates.
 
-❌ Not bulletproof encryption — just cool, creative ciphering.
+Not bulletproof encryption — just cool, creative ciphering.
 
-> Hide messages in plain sight with math, dates, and ✨ a little magic.
+> Hide messages in plain sight with math, dates, and a little magic.
 
 ## Cryptographically Speaking
 
 PK Scrambled Eggs is:
 
-- 🧠 An OTP-inspired Vigenère system using pseudorandom constant-derived keys.
-- 🔐 A custom cipher system that combines:
+- An OTP-inspired Vigenère system using pseudorandom constant-derived keys.
+- A custom cipher system that combines:
   - One-time-pad principles
   - Deterministic pseudorandom key generation (e.g. from π or e)
   - Date-based obfuscation
-- 🎨 Great for creative crypto, art, puzzles, and hiding messages in plain sight.
+- Great for creative crypto, art, puzzles, and hiding messages in plain sight.
 
-It’s not cryptographically secure — it’s **obfuscation with style**.
+It's not cryptographically secure — it's obfuscation with style.
 
-- 🔐 Obfuscated cipher scheme
-- 🔢 Key-morphing encoding system
-- 🔍 Temporal+Mathematical Keyed Cipher
-- 🎨 Steganographic micro-crypto
+- Obfuscated cipher scheme
+- Key-morphing encoding system
+- Temporal+Mathematical Keyed Cipher
+- Steganographic micro-crypto
 
 ## Usages
 
-- Hiding a message in jewelry or a notebook	✅ More than enough	
-- Obfuscating IDs or non-sensitive values	✅ Great and clever	
-- Storing passwords, crypto wallets, private info	❌ Better use actual encryption	
-- Building a puzzle/code for fun or art	✅ Amazing idea 💡	
-- Trying to impress a cryptographer	❌ Not crypto-safe, but cool! 😄
+- Hiding a message in jewelry or a notebook	More than enough	
+- Obfuscating IDs or non-sensitive values	Great and clever	
+- Storing passwords, crypto wallets, private info	Better use actual encryption	
+- Building a puzzle/code for fun or art	Amazing idea	
+- Trying to impress a cryptographer	Not crypto-safe, but cool!
 
 ## What is it for ? 
 
@@ -75,11 +75,66 @@ Result: a scrambled string that's reversible *only if you know the date and cons
 #  -d, --date string    A date flag (MM-DD-YYYY) (default "01-03-2009")
 #  -s, --string string  A string flag (default "default")
 #  -i, --constant int   An integer flag (0-5)
+#  -f, --file string    A filepath to read string input from
+#  -v, --debug          Enable verbose output
 go run cmd/main.go --date 10-05-2023 --constant 1 --string "HelloWorld"
 # or use the binary
 # make build to create it
 ./pk_scrambled_eggs --date 10-05-2023 --constant 1 --string "HelloWorld"
+# Read from file
+go run cmd/main.go -f input.txt
 ```
+
+## Output Format
+
+The tool outputs results in JSON format by default, containing both base64-encoded and raw (unescaped) versions of the scrambled and unscrambled strings. This allows for easy parsing and handling of binary data.
+
+Example JSON output:
+```json
+{
+  "scrambled_base64": "ZXV3Dm10ZW4SY29yaG50ZxFmZ2VpaWUMdWJ2Y2oOcGpwcHZ1cAt0dHN9dGd3DWpuchF4dmtqanRlDGpzdmNtdWoPd2ZpZGl8DHd9cXd4eG8=",
+  "scrambled_raw": "euw\u000emten\u0012corhntg\u0011fgeiie\fubvcj\u000epjppvup\u000btts}tgw\rjnr\u0011xvkjjte\fjsvcmuj\u000fwfidi|\fw}qwxxo",
+  "unscrambled_base64": "X3VvBmtqYWgCY29oXGRoYwNiY2FZX2UIcWB0Y2AGamhsYmR1aglsam1tZFttB1hkcgNmbltmWHBjCFxrZGFlZ2AFbVxbYGlsCG91aWlwZms=",
+  "unscrambled_raw": "_uo\u0006kjah\u0002coh\\dhc\u0003bcaY_e\bq`tc`\u0006jhlbduj\tljmmd[m\u0007Xdr\u0003fn[fXpc\b\\kdaeg`\u0005m\\[`il\bouiipfk"
+}
+```
+
+- `*_base64`: Base64-encoded strings for safe transport.
+- `*_raw`: Raw strings with actual newlines and control characters (escaped in JSON for validity).
+
+Use the `decode` subcommand to decode base64 strings to raw output.
+
+## Decode Command
+
+To decode a base64 string back to the raw scrambled or unscrambled text:
+
+```sh
+go run cmd/main.go decode "base64_string_here"
+```
+
+Example:
+```sh
+go run cmd/main.go decode "ZXV3Dm10ZW4SY29yaG50ZxFmZ2VpaWUMdWJ2Y2oOcGpwcHZ1cAt0dHN9dGd3DWpuchF4dmtqanRlDGpzdmNtdWoPd2ZpZGl8DHd9cXd4eG8="
+```
+
+This outputs the raw string with actual newlines. You can redirect it to a file for further processing:
+
+```sh
+go run cmd/main.go decode "base64_string_here" > input3.txt
+```
+
+Then, run the tool on `input3.txt` to verify unscrambling.
+
+## Testing Reversibility
+
+A bash script `scripts/test_scramble.sh` is provided to test if scrambling is reversible. It scrambles `input.txt`, decodes the result to `input2.txt`, scrambles `input2.txt`, and checks if the result matches the original `input.txt`.
+
+Run the test:
+```sh
+./scripts/test_scramble.sh
+```
+
+This verifies that the scrambling process is consistent and can be used for round-trip encoding/decoding.
 
 ## Example
 

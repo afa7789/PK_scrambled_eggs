@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/base64"
 	"fmt"
 	"os"
 	"time"
@@ -71,6 +72,25 @@ func main() {
 			}
 		},
 	}
+
+	var decodeCmd = &cobra.Command{
+		Use:   "decode [base64 string]",
+		Short: "Decode a base64 string",
+		Run: func(cmd *cobra.Command, args []string) {
+			if len(args) != 1 {
+				fmt.Println("Provide a base64 string")
+				os.Exit(1)
+			}
+			decoded, err := base64.StdEncoding.DecodeString(args[0])
+			if err != nil {
+				fmt.Println("Error decoding:", err)
+				os.Exit(1)
+			}
+			fmt.Println(string(decoded))
+		},
+	}
+
+	rootCmd.AddCommand(decodeCmd)
 
 	rootCmd.Flags().IntVarP(&intFlag, "constant", "i", 0, "An integer flag (0-5)")
 	rootCmd.Flags().StringVarP(&stringFlag, "string", "s", "default", "A string flag")
