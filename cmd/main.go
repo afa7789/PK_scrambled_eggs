@@ -41,7 +41,7 @@ func main() {
 			// 3 - Natural logarithm of 2, ln(2)
 			// 4 - Euler's constant γ
 			// 5 - Pythagoras' constant √2
-			if !(dateFlag == "00-00-0000") {
+			if dateFlag != "00-00-0000" {
 				_, err := time.Parse("01-02-2006", dateFlag)
 				if err != nil {
 					fmt.Println("Date must be in the format MM-DD-YYYY")
