@@ -1,5 +1,5 @@
 #!/bin/bash
-include .env
+# include .env
 
 # run the client
 run: ## calling the cmd to run the client.

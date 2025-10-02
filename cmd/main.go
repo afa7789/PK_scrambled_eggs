@@ -14,15 +14,17 @@ func main() {
 	var intFlag int
 	var stringFlag string
 	var dateFlag string
+	var fileFlag string
 
 	var rootCmd = &cobra.Command{
 		Use:   "app",
 		Short: "An application that processes flags",
 		Long: `An application that processes flags with the following options:
-  -i, --constant int   An integer flag (0-5)
-  -s, --string string  A string flag (default "default")
-  -d, --date string    A date flag (MM-DD-YYYY) (default "01-03-2009")
-  -h, --help           Show help message`,
+	-i, --constant int   An integer flag (0-5)
+	-s, --string string  A string flag (default "default")
+	-f, --file string    A filepath to read string input from
+	-d, --date string    A date flag (MM-DD-YYYY) (default "01-03-2009")
+	-h, --help           Show help message`,
 		Run: func(cmd *cobra.Command, args []string) {
 
 			// integer from 0 to 5.
@@ -45,6 +47,15 @@ func main() {
 				}
 			}
 
+			// If fileFlag is set, read string from file
+			if fileFlag != "" {
+				data, err := os.ReadFile(fileFlag)
+				if err != nil {
+					fmt.Printf("Failed to read file '%s': %v\n", fileFlag, err)
+					os.Exit(1)
+				}
+				stringFlag = string(data)
+			}
 			fmt.Printf("Integer: %d => %s \n", intFlag, nconst.Name(intFlag))
 			fmt.Printf("String: %s\n", stringFlag)
 			fmt.Printf("Date: %s\n", dateFlag)
@@ -57,6 +68,7 @@ func main() {
 
 	rootCmd.Flags().IntVarP(&intFlag, "constant", "i", 0, "An integer flag (0-5)")
 	rootCmd.Flags().StringVarP(&stringFlag, "string", "s", "default", "A string flag")
+	rootCmd.Flags().StringVarP(&fileFlag, "file", "f", "", "A filepath to read string input from")
 	// 3 January 2009
 	rootCmd.Flags().StringVarP(&dateFlag, "date", "d", "01-03-2009", "A date flag (MM-DD-YYYY)")
 
